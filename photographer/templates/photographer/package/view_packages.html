@@ -1,0 +1,55 @@
+{% extends 'photographer.html' %} {% block content %}
+<div class="container">
+  {% for messages in messages %}
+  <h4 class="text-center" style="color: rgb(17, 179, 66)">{{ messages }}</h4>
+  {% endfor %}
+  <h2>View Packages</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Your Name</th>
+        <th>Package Name</th>
+        <th>Package Type</th>
+        <th>Image</th>
+        <th>Cover Image</th>
+        <th>Duration</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for package in packages %}
+      <tr>
+        <td>{{ package.photographerName }}</td>
+        <td>{{ package.packageName }}</td>
+        <td>{{ package.type }}</td>
+        <td><img src="{{ package.img.url }}" alt="Image" width="100" /></td>
+        <td>
+          <img
+            src="{{ package.cover_img.url }}"
+            alt="Cover Image"
+            width="100"
+          />
+        </td>
+        <td>{{ package.duration }}</td>
+        <td>{{ package.price }}</td>
+        <td>
+          <!-- Edit button -->
+          <form method="post" action="{% url 'edit_package' package.id %}" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="edit" value="true">
+            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+          </form>
+          <!-- Delete button -->
+          <form method="post" action="{% url 'delete_package' package.id %}" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="delete" value="true">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

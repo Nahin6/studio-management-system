@@ -1,0 +1,79 @@
+{% extends 'photographer.html' %} {% block content %}
+<div class="container package_add_container">
+  <h2>Edit Package</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="photographerName" class="form-label">Photographer Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="photographerName"
+        name="photographerName"
+        value="{{ package.photographerName }}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="packageName" class="form-label">Package Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="packageName"
+        name="packageName"
+        value="{{ package.packageName }}"
+
+      />
+    
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Package Type</label>
+      <input
+        type="text"
+        class="form-control"
+        id="type"
+        name="type"
+        value="{{ package.type }}"
+
+      />
+    
+    </div>
+    <div class="mb-3">
+      <label for="img" class="form-label">Image</label>
+      <input type="file" class="form-control" id="img" name="img" />
+    </div>
+    <div class="mb-3">
+      <label for="cover_img" class="form-label">Cover Image</label>
+      <input type="file" class="form-control" id="cover_img" name="cover_img" />
+    </div>
+    <div class="mb-3">
+      <label for="duration" class="form-label">Duration</label>
+      <input
+        type="text"
+        class="form-control"
+        id="duration"
+        name="duration"
+        value="{{ package.duration }}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="duration" class="form-label">Description</label>
+      <textarea class="form-control" name="description" id="description">{{ package.description }}</textarea>
+
+      <!-- <input type="text" class="form-control" id="description" name="description" /> -->
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="text"
+        class="form-control"
+        id="price"
+        name="price"
+        value="{{ package.price }}"
+      />
+    </div>
+    <div class="text-center">
+      <button type="submit" class="mb-4">Update</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

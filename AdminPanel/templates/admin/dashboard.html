@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h3>Admin Dashboard from admin panel app</h3>
+<div>
+    {% if user.is_authenticated %}
+    <p>Logged in as: {{ user.name }}</p>
+    {% else %}
+    <p>Please <a href="{% url 'login' %}">log in</a> to view the dashboard.</p>
+    {% endif %}
+</div>
+{% endblock content %}

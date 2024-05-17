@@ -1,0 +1,27 @@
+{% extends 'photographer.html' %}
+{% load static %}
+{% block content %}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="hero-title">Capture Timeless Moments</h1>
+                    <p class="hero-description">Elevate your photography to new heights with our expertly curated packages and services. Whether you're a seasoned professional or just starting out, we have everything you need to capture the perfect shot and create unforgettable memories.</p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'PackageAddPage' %}" class="btn btn-dark mr-3">Post a package</a>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image">
+                    <img src="{% static 'images/Women_Collaborating_at_Work-removebg.png' %}" alt="Hero Image">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

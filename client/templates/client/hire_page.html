@@ -1,0 +1,116 @@
+
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %} 
+
+<div class="container package_add_container">
+  {% for message in messages %}
+  <h4 class="text-center" style="color: rgb(177, 14, 9)">{{ message }}</h4>
+  {% endfor %}
+  
+  <form method="post" enctype="multipart/form-data" action="{% url 'hire_photographer' package.id %}" id="hireForm">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="client_name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="client_name" name="client_name" />
+      <div class="invalid-data" id="client_name_error"></div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="client_email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="client_email" name="client_email" />
+      <div class="invalid-data" id="client_email_error"></div>
+
+    </div>
+  
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone Number</label>
+      <input type="tel" class="form-control" id="phone" name="phone" />
+      <div class="invalid-data" id="phone_error"></div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+      <div class="invalid-data" id="address_error"></div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="starting_date" class="form-label">Starting Date</label>
+      <input type="date" class="form-control" id="starting_date" name="starting_date" />
+      <div class="invalid-data" id="starting_date_error"></div>
+    </div>
+  
+    <div class="mb-3">  
+      <label for="detail_message" class="form-label">Detail Message</label>
+      <textarea class="form-control" id="detail_message" name="detail_message" rows="5"></textarea>
+      <div class="invalid-data" id="detail_message_error"></div>
+    </div>
+  
+    <div class="text-center mt-4">
+      <button type="submit" class="mb-5" id="submitButton">Submit</button>
+    </div>
+  </form>
+</div>
+
+<script>
+document.getElementById('hireForm').addEventListener('submit', function(event) {
+  let isValid = true;
+
+  // Clear previous error messages
+  document.querySelectorAll('.invalid-data').forEach(function(el) {
+    el.textContent = '';
+  });
+
+  // Name validation
+  const clientName = document.getElementById('client_name');
+  if (clientName.value.trim() === '') {
+    isValid = false;
+    document.getElementById('client_name_error').textContent = 'Name is required.';
+    console.log('error');
+  }
+
+  // Email validation
+  const clientEmail = document.getElementById('client_email');
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(clientEmail.value)) {
+    isValid = false;
+    document.getElementById('client_email_error').textContent = 'Please enter a valid email address.';
+  }
+
+  // Phone validation
+  const phone = document.getElementById('phone');
+  if (phone.value.trim() === '') {
+    isValid = false;
+    document.getElementById('phone_error').textContent = 'Phone number is required.';
+  }
+
+  // Address validation
+  const address = document.getElementById('address');
+  if (address.value.trim() === '') {
+    isValid = false;
+    document.getElementById('address_error').textContent = 'Address is required.';
+  }
+
+  // Starting date validation
+  const startingDate = document.getElementById('starting_date');
+  if (startingDate.value.trim() === '') {
+    isValid = false;
+    document.getElementById('starting_date_error').textContent = 'Starting date is required.';
+  }
+
+  // Detail message validation
+  const detailMessage = document.getElementById('detail_message');
+  if (detailMessage.value.trim() === '') {
+    isValid = false;
+    document.getElementById('detail_message_error').textContent = 'Detail message is required.';
+  }
+
+  if (!isValid) {
+    event.preventDefault();  // Prevent form submission
+  }
+});
+</script>
+
+{% endblock content %}

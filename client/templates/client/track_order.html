@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container">
+  {% for messages in messages %}
+  <h4 class="text-center" style="color: rgb(17, 179, 66)">{{ messages }}</h4>
+  {% endfor %}
+  <h2 class="my-4">Your ordered Packages</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Package Name</th>
+        <th>Photographer Name</th>
+        <th>Duration</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for hireIno in hireInfos %}
+      <tr>
+        <td>{{ hireIno.package.packageName }}</td>
+        <td>{{ hireIno.package.photographerName }}</td>
+        <td>{{ hireIno.package.duration }}</td>
+        <td>{{ hireIno.package.price }}</td>
+        {% if hireIno.status|is_equal:0 %}
+        <td>Pending</td>
+        {% elif hireIno.status|is_equal:1 %}
+        <td>Approved</td>
+        {% elif hireIno.status|is_equal:2 %}
+        <td>Rejected</td>
+        {% else %}
+        <td>Unknown</td>
+        {% endif %}
+        <td>
+          <!-- Delete button -->
+          <form method="post" action="{% url 'delete_package' hireIno.id %}" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="delete" value="true">
+            <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

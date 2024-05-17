@@ -1,0 +1,387 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");body{background-color: #eee;font-family: "Poppins", sans-serif;font-weight: 300}.cart{height: 100vh}.progresses{display: flex;align-items: center}.line{width: 76px;height: 6px;background: #63d19e}.steps{display: flex;background-color: #63d19e;color: #fff;font-size: 12px;width: 30px;height: 30px;align-items: center;justify-content: center;border-radius: 50%}.check1{display: flex;background-color: #63d19e;color: #fff;font-size: 17px;width: 60px;height: 60px;align-items: center;justify-content: center;border-radius: 50%;margin-bottom: 10px}.invoice-link{font-size: 15px}.order-button{height: 50px}.background-muted{background-color:#fafafc}
+
+body {
+  margin: 0;
+  color: #2e323c;
+  background: #fff7f1;
+  position: relative;
+  height: 100%;
+  font-family: Verdana, sans-serif;
+}
+
+.hero-section {
+  /* background: url("/static/images/Women\ Collaborating\ at\ Work.jpg") no-repeat fixed;
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;  */
+  /* background-color: #f8f9fa; */
+  padding: 100px 0;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.hero-buttons a {
+  gap: 50px;
+}
+.hero-buttons .btn {
+  gap: 50px;
+  font-size: 1.2rem;
+}
+
+.hero-image img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+}
+
+/* img.card__image {
+  height: 350px;
+  max-width: 100%;
+} */
+#img-style {
+  border-radius: 1rem 0 0 1rem;
+  max-width: 100%;
+  height: 609px;
+}
+
+.account-settings .user-profile {
+  margin: 0 0 1rem 0;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+  margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+  width: 90px;
+  height: 90px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+  margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #9fa8b9;
+}
+.account-settings .about {
+  margin: 2rem 0 0 0;
+  text-align: center;
+}
+.account-settings .about h5 {
+  margin: 0 0 15px 0;
+  color: #8b00e1;
+}
+.account-settings .about p {
+  font-size: 0.825rem;
+}
+.form-control {
+  border: 1px solid #cfd1d8;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font-size: 0.825rem;
+  background: #ffffff;
+  color: #2e323c;
+}
+
+.card {
+  background: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 0;
+  margin-bottom: 1rem;
+}
+
+.carouselExampleControlsCard {
+  height: 500px;
+}
+
+img.d-block.w-100 {
+  height: 500px;
+  max-width: 100%;
+}
+
+:root {
+  --surface-color: #fff;
+  --curve: 40;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #fef8f8;
+} */
+.package_add_container {
+  max-width: 600px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 4rem 5vw;
+  padding: 0;
+  list-style-type: none;
+}
+
+.card {
+  position: relative;
+  display: block;
+  height: 100%;
+  border-radius: calc(var(--curve) * 1px);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.card__image {
+  width: 100%;
+  height: auto;
+}
+
+.card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  border-radius: calc(var(--curve) * 1px);
+  background-color: var(--surface-color);
+  transform: translateY(100%);
+  transition: 0.2s ease-in-out;
+}
+
+.card:hover .card__overlay {
+  transform: translateY(0);
+}
+
+.card__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding: 2em;
+  border-radius: calc(var(--curve) * 1px) 0 0 0;
+  background-color: var(--surface-color);
+  transform: translateY(-100%);
+  transition: 0.2s ease-in-out;
+}
+
+.card__arc {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  z-index: 1;
+}
+
+/* .card__arc path {
+  fill: var(--surface-color);
+  d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
+}        */
+
+.card:hover .card__header {
+  transform: translateY(0);
+}
+
+.card__thumb {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.card__title {
+  font-size: 1em;
+  margin: 0 0 0.3em;
+  color: #6a515e;
+}
+
+.card__tagline {
+  display: block;
+  margin: 1em 0;
+  font-family: "MockFlowFont";
+  font-size: 0.8em;
+  color: #d7bdca;
+}
+
+.card__status {
+  font-size: 0.8em;
+  color: #d7bdca;
+}
+
+.card__description {
+  padding: 0 2em 2em;
+  margin: 0;
+  color: #d7bdca;
+  font-family: "MockFlowFont";
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+button {
+  appearance: none;
+  background-color: transparent;
+  border: 0.125em solid #1a1a1a;
+  border-radius: 0.9375em;
+  box-sizing: border-box;
+  color: #3b3b3b;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 2.75em;
+  min-width: 0;
+  outline: none;
+  padding: 1em 2.3em;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform;
+}
+
+button:disabled {
+  pointer-events: none;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #1a1a1a;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.invalid-data {
+  display: block;
+  color: red;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+
+
+.container {
+  /* max-width: 1000px; */
+  margin: 0 auto;
+}
+
+/* Card styling */
+.card-advanced {
+  border: none;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  overflow: hidden; /* Needed for layering effects */
+  position: relative; /* Needed for layering effects */
+  transition: transform 0.2s ease-in-out; /* Hover animation */
+}
+
+.card-advanced:hover {
+  transform: translateY(-5px); /* Hover elevation */
+}
+
+.card-img-top {
+  border-radius: 10px 10px 0 0; /* Rounded top corners */
+  transition: transform 0.2s ease-in-out; /* Hover animation */
+  max-height: 215px;
+}
+
+.card-advanced:hover .card-img-top {
+  transform: scale(1.02); /* Slight zoom on hover */
+}
+
+.card-body {
+  padding: 20px;
+  position: relative; /* Needed for overlays */
+}
+
+/* Content layering and typography */
+.card-title {
+  margin-bottom: 15px;
+}
+
+.card-title h3 {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.card-text {
+  color: #777;
+}
+
+/* Custom buttons */
+
+
+.btn-primary {
+  background-color: #4CAF50; /* Green */
+  border-color: #4CAF50;
+}
+
+.btn-primary:hover {
+  background-color: #3e8e41; /* Darker green on hover */
+  border-color: #3e8e41;
+}
+
+.btn-outline-light {
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light white background on hover */
+  border-color: #fff;
+}
+
+.btn-secondary {
+  background-color: #343A40; /* Dark gray */
+  border-color: #343A40;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #29323a; /* Darker gray on hover */
+  border-color: #29323a;
+}
+
+.btn-info {
+  background-color: #007bff; /* Blue */
+  border-color: #007bff;
+}
+
+.btn-info:hover {
+  background-color: #0062cc; /* Darker blue on hover */
+  border-color: #0062cc;
+}

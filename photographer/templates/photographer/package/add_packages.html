@@ -1,0 +1,113 @@
+{% extends 'photographer.html' %} {% block content %}
+<div class="container package_add_container">
+  <h2>Upload Package</h2>
+  {% for messages in messages %}
+  <h4 class="text-center" style="color: rgb(177, 14, 9)">{{ messages }}</h4>
+  {% endfor %}
+  <form
+    method="post"
+    enctype="multipart/form-data"
+    action="{% url 'add_package' %}"
+  >
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="photographerName" class="form-label">Your Name</label>
+      <input
+        type="text"
+        class="form-control{% if form.errors.photographerName %} is-invalid{% endif %}"
+        id="photographerName"
+        name="photographerName"
+      />
+
+    </div>
+    <div class="mb-3">
+      <label for="packageName" class="form-label">Package Name</label>
+      <input
+        type="text"
+        class="form-control{% if form.errors.packageName %} is-invalid{% endif %}"
+        id="packageName"
+        name="packageName"
+        />
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Package Type</label>
+      <input
+        type="text"
+        class="form-control{% if form.errors.type %} is-invalid{% endif %}"
+        id="type"
+        name="type"
+        />
+    </div>
+    <div class="mb-3">
+      <label for="img" class="form-label">Image</label>
+      <input
+        type="file"
+        class="form-control{% if form.errors.img %} is-invalid{% endif %}"
+        id="img"
+        name="img"
+        
+      />
+      {% if form.errors.img %}
+      <div class="invalid-feedback">{{ form.errors.img }}</div>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="cover_img" class="form-label">Cover Image</label>
+      <input
+        type="file"
+        class="form-control{% if form.errors.cover_img %} is-invalid{% endif %}"
+        id="cover_img"
+        name="cover_img"
+        
+      />
+      {% if form.errors.cover_img %}
+      <div class="invalid-feedback">{{ form.errors.cover_img }}</div>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="duration" class="form-label">Duration</label>
+      <input
+        type="text"
+        class="form-control{% if form.errors.duration %} is-invalid{% endif %}"
+        id="duration"
+        name="duration"
+        
+      />
+      {% if form.errors.duration %}
+      <div class="invalid-feedback">{{ form.errors.duration }}</div>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        class="form-control{% if form.errors.description %} is-invalid{% endif %}"
+        name="description"
+        id="description"
+        
+      >
+{{ form.cleaned_data.description }}</textarea
+      >
+      {% if form.errors.description %}
+      <div class="invalid-feedback">{{ form.errors.description }}</div>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="text"
+        class="form-control{% if form.errors.price %} is-invalid{% endif %}"
+        id="price"
+        name="price"
+        
+      />
+      {% if form.errors.price %}
+      <div class="invalid-feedback">{{ form.errors.price }}</div>
+      {% endif %}
+    </div>
+    <div class="text-center">
+      <button type="submit" class="mb-5">ADD</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
