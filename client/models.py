@@ -60,7 +60,7 @@ class Client(AbstractBaseUser):
 
 class HiringDetails(models.Model):
     package = models.ForeignKey('photographer.Package', on_delete=models.CASCADE)
-    # photographer_id = models.ForeignKey('photographer.Package', on_delete=models.CASCADE)
+    photographer_id = models.IntegerField(default=None)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)  # Using string reference
     client_name = models.CharField(max_length=100)
     client_email = models.CharField(max_length=100)

@@ -1,13 +1,15 @@
-{% extends 'photographer.html' %} {% block content %}
+{% extends 'photographer.html' %} 
+{% block content %}
 <div class="container package_add_container">
   <h2>Upload Package</h2>
-  {% for messages in messages %}
-  <h4 class="text-center" style="color: rgb(177, 14, 9)">{{ messages }}</h4>
+  {% for message in messages %}
+  <h4 class="text-center" style="color: rgb(177, 14, 9)">{{ message }}</h4>
   {% endfor %}
   <form
     method="post"
     enctype="multipart/form-data"
     action="{% url 'add_package' %}"
+    id="packageForm"
   >
     {% csrf_token %}
 
@@ -15,99 +17,164 @@
       <label for="photographerName" class="form-label">Your Name</label>
       <input
         type="text"
-        class="form-control{% if form.errors.photographerName %} is-invalid{% endif %}"
+        class="form-control"
         id="photographerName"
         name="photographerName"
       />
-
+      <div class="invalid-data" id="photographerName_error"></div>
     </div>
+    
     <div class="mb-3">
       <label for="packageName" class="form-label">Package Name</label>
       <input
         type="text"
-        class="form-control{% if form.errors.packageName %} is-invalid{% endif %}"
+        class="form-control"
         id="packageName"
         name="packageName"
-        />
+      />
+      <div class="invalid-data" id="packageName_error"></div>
     </div>
+    
     <div class="mb-3">
       <label for="type" class="form-label">Package Type</label>
       <input
         type="text"
-        class="form-control{% if form.errors.type %} is-invalid{% endif %}"
+        class="form-control"
         id="type"
         name="type"
-        />
+      />
+      <div class="invalid-data" id="type_error"></div>
     </div>
+    
     <div class="mb-3">
       <label for="img" class="form-label">Image</label>
       <input
         type="file"
-        class="form-control{% if form.errors.img %} is-invalid{% endif %}"
+        class="form-control"
         id="img"
         name="img"
-        
       />
-      {% if form.errors.img %}
-      <div class="invalid-feedback">{{ form.errors.img }}</div>
-      {% endif %}
+      <div class="invalid-data" id="img_error"></div>
     </div>
+    
     <div class="mb-3">
       <label for="cover_img" class="form-label">Cover Image</label>
       <input
         type="file"
-        class="form-control{% if form.errors.cover_img %} is-invalid{% endif %}"
+        class="form-control"
         id="cover_img"
         name="cover_img"
-        
       />
-      {% if form.errors.cover_img %}
-      <div class="invalid-feedback">{{ form.errors.cover_img }}</div>
-      {% endif %}
+      <div class="invalid-data" id="cover_img_error"></div>
     </div>
+    
     <div class="mb-3">
       <label for="duration" class="form-label">Duration</label>
       <input
         type="text"
-        class="form-control{% if form.errors.duration %} is-invalid{% endif %}"
+        class="form-control"
         id="duration"
         name="duration"
-        
       />
-      {% if form.errors.duration %}
-      <div class="invalid-feedback">{{ form.errors.duration }}</div>
-      {% endif %}
+      <div class="invalid-data" id="duration_error"></div>
     </div>
+    
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
       <textarea
-        class="form-control{% if form.errors.description %} is-invalid{% endif %}"
+        class="form-control"
         name="description"
         id="description"
-        
-      >
-{{ form.cleaned_data.description }}</textarea
-      >
-      {% if form.errors.description %}
-      <div class="invalid-feedback">{{ form.errors.description }}</div>
-      {% endif %}
+      ></textarea>
+      <div class="invalid-data" id="description_error"></div>
     </div>
+    
     <div class="mb-3">
       <label for="price" class="form-label">Price</label>
       <input
         type="text"
-        class="form-control{% if form.errors.price %} is-invalid{% endif %}"
+        class="form-control"
         id="price"
         name="price"
-        
       />
-      {% if form.errors.price %}
-      <div class="invalid-feedback">{{ form.errors.price }}</div>
-      {% endif %}
+      <div class="invalid-data" id="price_error"></div>
     </div>
+    
     <div class="text-center">
       <button type="submit" class="mb-5">ADD</button>
     </div>
   </form>
 </div>
+
+<script>
+document.getElementById('packageForm').addEventListener('submit', function(event) {
+  let isValid = true;
+
+  // Clear previous error messages
+  document.querySelectorAll('.invalid-data').forEach(function(el) {
+    el.textContent = '';
+  });
+
+  // Your Name validation
+  const photographerName = document.getElementById('photographerName');
+  if (photographerName.value.trim() === '') {
+    isValid = false;
+    document.getElementById('photographerName_error').textContent = 'Your name is required.';
+  }
+
+  // Package Name validation
+  const packageName = document.getElementById('packageName');
+  if (packageName.value.trim() === '') {
+    isValid = false;
+    document.getElementById('packageName_error').textContent = 'Package name is required.';
+  }
+
+  // Package Type validation
+  const type = document.getElementById('type');
+  if (type.value.trim() === '') {
+    isValid = false;
+    document.getElementById('type_error').textContent = 'Package type is required.';
+  }
+
+  // Image validation
+  const img = document.getElementById('img');
+  if (img.value.trim() === '') {
+    isValid = false;
+    document.getElementById('img_error').textContent = 'Image is required.';
+  }
+
+  // Cover Image validation
+  const coverImg = document.getElementById('cover_img');
+  if (coverImg.value.trim() === '') {
+    isValid = false;
+    document.getElementById('cover_img_error').textContent = 'Cover image is required.';
+  }
+
+  // Duration validation
+  const duration = document.getElementById('duration');
+  if (duration.value.trim() === '') {
+    isValid = false;
+    document.getElementById('duration_error').textContent = 'Duration is required.';
+  }
+
+  // Description validation
+  const description = document.getElementById('description');
+  if (description.value.trim() === '') {
+    isValid = false;
+    document.getElementById('description_error').textContent = 'Description is required.';
+  }
+
+  // Price validation
+  const price = document.getElementById('price');
+  if (price.value.trim() === '') {
+    isValid = false;
+    document.getElementById('price_error').textContent = 'Price is required.';
+  }
+
+  if (!isValid) {
+    event.preventDefault();  // Prevent form submission
+  }
+});
+</script>
 {% endblock %}
+  

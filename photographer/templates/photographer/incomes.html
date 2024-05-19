@@ -1,0 +1,79 @@
+{% extends 'photographer.html' %}
+{% block content %}
+<!-- <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card card-income">
+          <div class="card-header">
+            <h2>Total Income</h2>
+          </div>
+          <div class="card-body">
+            <p class="lead">{{ total_credit }} TK</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-expense">
+          <div class="card-header">
+            <h2>Total Expense</h2>
+          </div>
+          <div class="card-body">
+            <p class="lead">{{ total_debit }} TK</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-profit">
+          <div class="card-header">
+            <h2>Total Profit</h2>
+          </div>
+          <div class="card-body">
+            <p class="lead">{{ total_profit }} TK</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Your Income's track</h2>
+    <div class="row">
+        <!-- Total Income Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card dashboard-card bg-income text-center p-4">
+                <div class="card-body">
+                    <div class="card-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h4 class="card-title">Total Income</h4>
+                    <p class="card-total">{{ total_credit }} TK</p>
+                </div>
+            </div>
+        </div>
+        <!-- Total Expense Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card dashboard-card bg-expense text-center p-4">
+                <div class="card-body">
+                    <div class="card-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h4 class="card-title">Total Expense</h4>
+                    <p class="card-total">{{ total_debit }} TK</p>
+                </div>
+            </div>
+        </div>
+        <!-- Total Profit Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card dashboard-card bg-profit text-center p-4">
+                <div class="card-body">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="card-title">Total Profit</h4>
+                    <p class="card-total">{{ total_profit }} TK</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

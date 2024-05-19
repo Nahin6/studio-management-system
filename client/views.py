@@ -45,6 +45,17 @@ def track_order(request):
     hireInfos = HiringDetails.objects.filter(client_id=request.user.id).select_related('package')
     return render(request, 'client/track_order.html', {'hireInfos': hireInfos})
 
+def delete_package(request, hireIno_id):
+    hire_info = get_object_or_404(HiringDetails, id=hireIno_id)
+
+    if hire_info:
+        hire_info.delete()
+        messages.success(request, 'Package has been successfully cancelled.')
+        return redirect('track_order')  
+    
+    messages.error(request, 'Invalid request method.')
+    return redirect('track_order')
+
 def details_page(request, package_id):
     package = get_object_or_404(Package, id=package_id)
     context = {'package': package}  
@@ -161,6 +172,7 @@ def hire_photographer(request, package_id):
         if form.is_valid(): 
             form_instance = form.save(commit=False)
             form_instance.client_id = request.user.id  
+            form_instance.photographer_id = package.user.id  
             form_instance.package_id = package_id
             form_instance.save()
             messages.success(request, 'submitted successfully.')

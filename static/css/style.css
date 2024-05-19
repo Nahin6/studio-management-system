@@ -1,4 +1,53 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");body{background-color: #eee;font-family: "Poppins", sans-serif;font-weight: 300}.cart{height: 100vh}.progresses{display: flex;align-items: center}.line{width: 76px;height: 6px;background: #63d19e}.steps{display: flex;background-color: #63d19e;color: #fff;font-size: 12px;width: 30px;height: 30px;align-items: center;justify-content: center;border-radius: 50%}.check1{display: flex;background-color: #63d19e;color: #fff;font-size: 17px;width: 60px;height: 60px;align-items: center;justify-content: center;border-radius: 50%;margin-bottom: 10px}.invoice-link{font-size: 15px}.order-button{height: 50px}.background-muted{background-color:#fafafc}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+body {
+  background-color: #eee;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+.cart {
+  height: 100vh;
+}
+.progresses {
+  display: flex;
+  align-items: center;
+}
+.line {
+  width: 76px;
+  height: 6px;
+  background: #63d19e;
+}
+.steps {
+  display: flex;
+  background-color: #63d19e;
+  color: #fff;
+  font-size: 12px;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.check1 {
+  display: flex;
+  background-color: #63d19e;
+  color: #fff;
+  font-size: 17px;
+  width: 60px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.invoice-link {
+  font-size: 15px;
+}
+.order-button {
+  height: 50px;
+}
+.background-muted {
+  background-color: #fafafc;
+}
 
 body {
   margin: 0;
@@ -291,8 +340,6 @@ button:active {
   font-size: 13px;
 }
 
-
-
 .container {
   /* max-width: 1000px; */
   margin: 0 auto;
@@ -343,10 +390,9 @@ button:active {
 
 /* Custom buttons */
 
-
 .btn-primary {
-  background-color: #4CAF50; /* Green */
-  border-color: #4CAF50;
+  background-color: #4caf50; /* Green */
+  border-color: #4caf50;
 }
 
 .btn-primary:hover {
@@ -361,13 +407,18 @@ button:active {
 }
 
 .btn-outline-light:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Light white background on hover */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Light white background on hover */
   border-color: #fff;
 }
 
 .btn-secondary {
-  background-color: #343A40; /* Dark gray */
-  border-color: #343A40;
+  background-color: #343a40; /* Dark gray */
+  border-color: #343a40;
   color: #fff;
 }
 
@@ -384,4 +435,85 @@ button:active {
 .btn-info:hover {
   background-color: #0062cc; /* Darker blue on hover */
   border-color: #0062cc;
+}
+
+.job_container{
+  max-width: 500px;
+}
+
+  .dropbtn {
+    background-color: #04aa6d;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  }
+
+
+  .dashboard-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-10px);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.card-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.bg-income {
+    background-color: #28a745;
+    color: white;
+}
+
+.bg-expense {
+    background-color: #dc3545;
+    color: white;
+}
+
+.bg-profit {
+    background-color: #ffc107;
+    color: white;
 }

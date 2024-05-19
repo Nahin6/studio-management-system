@@ -20,4 +20,5 @@ urlpatterns = [
     path('hiring_photographer/<int:package_id>/', views.hire_photographer, name='hire_photographer'),
     path('track_order', views.track_order, name='track_order'),
     path('details_page/<int:package_id>/', views.details_page, name='details_page'),
+    path('delete_package/<int:hireIno_id>/', views.delete_package, name='delete_package'),
 ]

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load custom_filters %}
+  {% load static %}
+  {% load custom_filters %}
 
 {% block content %}
 <div class="container">
@@ -8,7 +8,7 @@
   <h4 class="text-center" style="color: rgb(17, 179, 66)">{{ messages }}</h4>
   {% endfor %}
   <h2 class="my-4">Your ordered Packages</h2>
-  <table class="table">
+  <table class="table " style="margin-bottom:290px;">
     <thead>
       <tr>
         <th>Package Name</th>
@@ -25,23 +25,20 @@
         <td>{{ hireIno.package.packageName }}</td>
         <td>{{ hireIno.package.photographerName }}</td>
         <td>{{ hireIno.package.duration }}</td>
-        <td>{{ hireIno.package.price }}</td>
+        <td>{{ hireIno.package.price }} TK</td>
         {% if hireIno.status|is_equal:0 %}
         <td>Pending</td>
         {% elif hireIno.status|is_equal:1 %}
-        <td>Approved</td>
+        <td style="color: rgb(12, 167, 74);">Approved</td>
         {% elif hireIno.status|is_equal:2 %}
-        <td>Rejected</td>
+        <td style="color: rgb(234, 36, 36);">Rejected</td>
+        {% elif hireIno.status|is_equal:3 %}
+        <td style="color: #1daa04;">Job Completed</td>
         {% else %}
         <td>Unknown</td>
         {% endif %}
         <td>
-          <!-- Delete button -->
-          <form method="post" action="{% url 'delete_package' hireIno.id %}" style="display: inline;">
-            {% csrf_token %}
-            <input type="hidden" name="delete" value="true">
-            <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
-          </form>
+            <a href="{% url 'delete_package' hireIno.id %}" type="submit" class="btn btn-danger">Cancel</a>
         </td>
       </tr>
       {% endfor %}
