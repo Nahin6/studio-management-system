@@ -6,70 +6,84 @@
   <h4 class="text-center" style="color: rgb(17, 179, 66)">{{ messages }}</h4>
   {% endfor %}
   <h2>Your received jobs</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Client Name</th>
-        <th>Phone</th>
-        <th>Adress</th>
-        <th>expected date</th>
-        <th>Message</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for details in jobDetails %}
-      <tr>
-        <td>{{ details.client_name }}</td>
-        <td>{{ details.phone }}</td>
-        <td>{{ details.address }}</td>
-        <td>{{ details.starting_date }}</td>
-        <td>{{ details.detail_message }}</td>
-        {% if details.status|is_equal:0 %}
-        <td>Pending</td>
-        {% elif details.status|is_equal:1 %}
-        <td style="color: #04aa6d">Approved</td>
-        {% elif details.status|is_equal:2 %}
-        <td style="color: #aa0f04">Rejected</td>
-        {% elif details.status|is_equal:3 %}
-        <td style="color: #1daa04">Job Completed</td>
-        {% else %}
-        <td>Unknown</td>
-        {% endif %}
-        <td>
-          <div class="dropdown-center">
-            {% if details.status|is_equal:3 %}
-            <button
-              class="btn btn-primary "
-              disabled
-              type="button"
-            >
-              Complete
-            </button>
-            {% else %}
-            <button
-              class="btn btn-primary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Actions
-            </button>
-            {% endif %}
-            <ul class="dropdown-menu" >
-              <li><a class="dropdown-item" href="{% url 'approve_job' details.id %}">Approve</a></li>
-              <li><a class="dropdown-item" href="{% url 'reject_job' details.id %}">Reject</a></li>
-              <li>
-                <a class="dropdown-item" href="{% url 'completed_job' details.id %}">Completed</a>
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div style="overflow-x: auto">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+          <th>Phone</th>
+          <th>Adress</th>
+          <th>expected date</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for details in jobDetails %}
+        <tr>
+          <td>{{ details.client_name }}</td>
+          <td>{{ details.phone }}</td>
+          <td>{{ details.address }}</td>
+          <td>{{ details.starting_date }}</td>
+          <td>{{ details.detail_message }}</td>
+          {% if details.status|is_equal:0 %}
+          <td>Pending</td>
+          {% elif details.status|is_equal:1 %}
+          <td style="color: #04aa6d">Approved</td>
+          {% elif details.status|is_equal:2 %}
+          <td style="color: #aa0f04">Rejected</td>
+          {% elif details.status|is_equal:3 %}
+          <td style="color: #1daa04">Job Completed</td>
+          {% else %}
+          <td>Unknown</td>
+          {% endif %}
+          <td>
+            <div class="dropdown-center">
+              {% if details.status|is_equal:3 %}
+              <button class="btn btn-primary" disabled type="button">
+                Complete
+              </button>
+              {% else %}
+              <button
+                class="btn btn-primary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Actions
+              </button>
+              {% endif %}
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'approve_job' details.id %}"
+                    >Approve</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'reject_job' details.id %}"
+                    >Reject</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'completed_job' details.id %}"
+                    >Completed</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 {% endblock %}

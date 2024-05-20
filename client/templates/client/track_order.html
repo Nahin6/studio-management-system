@@ -8,6 +8,7 @@
   <h4 class="text-center" style="color: rgb(17, 179, 66)">{{ messages }}</h4>
   {% endfor %}
   <h2 class="my-4">Your ordered Packages</h2>
+  <div style="overflow-x:auto;">
   <table class="table " style="margin-bottom:290px;">
     <thead>
       <tr>
@@ -38,11 +39,22 @@
         <td>Unknown</td>
         {% endif %}
         <td>
+          {% if hireIno.status|is_equal:3 %}
+          <button
+            class="btn btn-primary "
+            disabled
+            type="button"
+          >
+            Complete
+          </button>
+          {% else %}
             <a href="{% url 'delete_package' hireIno.id %}" type="submit" class="btn btn-danger">Cancel</a>
+            {% endif %}
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+</div>
 </div>
 {% endblock %}
