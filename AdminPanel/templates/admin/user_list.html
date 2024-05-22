@@ -1,0 +1,58 @@
+{% extends 'admin.html' %} {% load static %} {% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="my-4 text-center">User List</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td>{{ user.name }}</td>
+              <td>{{ user.phone }}</td>
+              <td>{{ user.email }}</td>
+              <td class="td_action">
+                <a
+                  href="{% url 'edit_user' user.id %}"
+                  class="btn btn-primary btn-sm"
+                  >Edit</a
+                >
+
+                <a
+                  href="{% url 'delete_user' user.id %}"
+                  type="submit"
+                  class="btn btn-danger btn-sm"
+                  >Delete</a
+                >
+                <a href="{% url 'client_spend_history' user.id %}" class="btn btn-info btn-sm">Check Spend History</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .td_action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    /* justify-content: space-around; */
+    gap: 15px;
+  }
+</style>
+
+{% endblock content %}

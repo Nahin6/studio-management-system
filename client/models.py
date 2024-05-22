@@ -1,11 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-# from photographer.models import Package   
-
-
 class ClientManager(BaseUserManager):
-    def create_user(self, name, phone, email, password=None, is_client=False,is_staff=False,is_superuser=False, is_photographer=False, is_admin=False):
+    def create_user(self, name, phone, email, password=None, is_client=False, is_staff=False, is_superuser=False, is_photographer=False, is_admin=False):
         if not email:
             raise ValueError('Clients must have an email address')
 
@@ -58,10 +55,14 @@ class Client(AbstractBaseUser):
     def __str__(self):
         return self.email
 
+    def total_spend(self):
+        from .models import HiringDetails  # Move import inside the method
+        return HiringDetails.objects.filter(client=self).aggregate(total_spend=models.Sum('package__price'))['total_spend'] or 0
+
 class HiringDetails(models.Model):
     package = models.ForeignKey('photographer.Package', on_delete=models.CASCADE)
     photographer_id = models.IntegerField(default=None)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)  # Using string reference
+    client = models.ForeignKey('Client', on_delete=models.CASCADE)
     client_name = models.CharField(max_length=100)
     client_email = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)
@@ -71,4 +72,4 @@ class HiringDetails(models.Model):
     status = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.client_name} hiring {self.package_id.photographerName}"
+        return f"{self.client_name} hiring {self.package.packageName}"

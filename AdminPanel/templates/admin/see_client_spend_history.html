@@ -1,0 +1,43 @@
+{% extends 'admin.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="my-4 text-center">Client Spend History</h2>
+      <h4 class="text-center">Client: {{ client.name }}</h4>
+      <p class="text-center">Total Spend: {{ total_spend }} TK</p>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Package</th>
+              <th>Photographer</th>
+              <th>Hire Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for detail in hiring_details %}
+            <tr>
+              <td>{{ detail.package.packageName }}</td>
+              <td>{{ photographer.name }}</td>
+              <td>{{ detail.starting_date }}</td>
+              <td>
+                {% if detail.status == 0 %} Pending
+                {% elif detail.status == 1 %} Approved
+                {% elif detail.status == 2 %} Declined
+                {% elif detail.status == 3 %} Completed
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

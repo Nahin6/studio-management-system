@@ -1,0 +1,32 @@
+{% extends 'admin.html' %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="my-4 text-center">Photographer Accounts Info</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Photographer Name:</th>
+                            <td>{{ photographer.name }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Total Earnings:</th>
+                            <td>{{ total_earnings }} TK</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Total Profit:</th>
+                            <td>{{ total_sent }} TK</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Total Jobs Done:</th>
+                            <td>{{ total_jobs_received }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

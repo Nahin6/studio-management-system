@@ -5,23 +5,44 @@ from django.contrib.auth.models import User,auth
 from django.urls import reverse
 from client.forms import HiringForm
 from photographer.models import Package
-from .models import Client, HiringDetails   
+from .models import Client, HiringDetails 
 from django.contrib import messages
 from mysqlx import Auth
 from django.contrib.auth import authenticate,logout,login as auth_login
 import mysql.connector as sql 
 from django.contrib.auth.decorators import login_required
-
-
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.hashers import make_password
 def home(request):
-	packages = Package.objects.all()
+	packages = Package.objects.filter(status=2)
 	return render(request, 'client/dashboard.html', {'packages': packages})
+
 def photographerDashboard(request):
 	context = {}
 	return render(request, 'photographer/dashboard.html', context)
 def adminDashboard(request):
-	context = {}
-	return render(request, 'admin/dashboard.html', context)
+    total_users = Client.objects.filter(is_client=1).count()
+    total_photographers = Client.objects.filter(is_photographer=1).count()
+    total_admins = Client.objects.filter(is_admin=1).count()
+    completed_orders = HiringDetails.objects.filter(status=3).count()
+    pending_orders = HiringDetails.objects.filter(status=1).count()
+    approved_orders = HiringDetails.objects.filter(status=2).count()
+    approved_packages = Package.objects.filter(status=2).count()
+    pending_packages = Package.objects.filter(status=1).count()
+    declined_packages = Package.objects.filter(status=3).count()
+
+    context = {
+        'total_users': total_users,
+        'total_photographers': total_photographers,
+        'total_admins': total_admins,
+        'completed_orders': completed_orders,
+        'pending_orders': pending_orders,
+        'approved_orders': approved_orders,
+        'approved_packages': approved_packages,
+        'pending_packages': pending_packages,
+        'declined_packages': declined_packages,
+    }
+    return render(request, 'admin/dashboard.html', context)
 def blocked(request):
 	context = {}
 	return render(request, 'authApp/error.html', context)
@@ -123,44 +144,26 @@ def register(request):
       
         return render( request,  'dashboard/signup.html')
     
-
-
-def updateProfile(request):
+@login_required
+def updateProfilee(request):
     if request.method == 'POST':
-        # Retrieve form data
-        name = request.POST.get('name', '')
-        phone = request.POST.get('phone', '')
-        email = request.POST.get('email', '')
-        old_password = request.POST.get('old_password', '')
-        new_password = request.POST.get('new_password', '')
-
-        # Get the logged-in user
         user = request.user
-
-        # Update user's information
-        if name:
-            user.name = name              
-        if phone:
-            user.phone = phone
-        if email:
-            user.email = email
-
-        # Check if old password matches and update new password
-        if old_password and new_password:
-            if user.check_password(old_password):
-                user.set_password(new_password)
-            else:
-                messages.error(request, 'Old password does not match')
-                return redirect('viewProfile')
-
-        user.save()
+        user.name = request.POST['name']
+        user.phone = request.POST['phone']
+        user.email = request.POST['email']
+        password = request.POST['new_password']
+        if password:
+            user.password = make_password(password)
+            user.save()
+            update_session_auth_hash(request, user)  # Prevents logout
+        else:
+            user.save()
         messages.success(request, 'Profile updated successfully.')
         return redirect('viewProfile')
     else:
         # Pass user's information to the template
         context = {'user': request.user}
         return render(request, 'authApp/profile.html', context)
-
 
 
 

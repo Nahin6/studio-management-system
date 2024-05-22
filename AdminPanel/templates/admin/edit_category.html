@@ -1,0 +1,24 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Edit Category</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="categoryName" class="form-label">Category Name</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="invalid-data" id="categoryName_error">
+                    {% for error in form.name.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

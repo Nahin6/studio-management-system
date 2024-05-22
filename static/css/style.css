@@ -529,3 +529,19 @@ th, td {
   text-align: left;
   padding: 8px;
 }
+
+.table-responsive {
+  margin-top: 20px;
+}
+.table th, .table td {
+  text-align: center;
+}
+
+.td_action {
+display: flex;
+justify-content: center;
+align-items: center;
+align-content: space-around;
+/* justify-content: space-around; */
+gap: 15px;
+}

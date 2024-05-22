@@ -1,0 +1,70 @@
+{% extends 'admin.html' %} {% block content %}
+<div class="container">
+  {% for messages in messages %}
+  <h4 class="text-center" style="color: rgb(17, 179, 66)">{{ messages }}</h4>
+  {% endfor %}
+  <h4 class="text-center my-4">Photographers added Packages</h4>
+  <div style="overflow-x: auto">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Your Name</th>
+          <th>Package Name</th>
+          <th>Package Type</th>
+          <th>Image</th>
+          <th>Cover Image</th>
+          <th>Duration</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for package in packages %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ package.photographerName }}</td>
+          <td>{{ package.packageName }}</td>
+          <td>{{ package.type }}</td>
+          <td><img src="{{ package.img.url }}" alt="Image" width="100" /></td>
+          <td>
+            <img
+              src="{{ package.cover_img.url }}"
+              alt="Cover Image"
+              width="100"
+            />
+          </td>
+          <td>{{ package.duration }}</td>
+          <td>{{ package.price }}</td>
+          {% if package.status == 1 %}  
+          <td>Pending</td>
+          {% elif package.status == 2 %}
+          <td>Approved</td>
+          {% elif package.status == 3 %}
+          <td>Declined</td>
+          {% else %}
+          <td>Unknown</td>
+          {% endif %}
+
+          <td class="td_action">
+            <a
+              href="{% url 'approved_package' package.id %}"
+              class="btn btn-primary btn-sm"
+              >Approve</a
+            >
+
+            <a
+              href="{% url 'decline_package' package.id %}"
+              type="submit"
+              class="btn btn-danger btn-sm"
+              >Decline</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

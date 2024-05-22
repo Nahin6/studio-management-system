@@ -5,16 +5,22 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
+from AdminPanel.models import PackageCategory
 from photographer.models import Income, Package
 from client.models import HiringDetails
 from .forms import DebitForm, PackageForm
 from .utils import update_job_status
 from django.db.models import Sum
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.hashers import make_password
+
 def PackageAddPage(request):
     context = {}
-     
+    categories = PackageCategory.objects.all()
     form = PackageForm()
     context['form'] = form
+    context['categories'] = categories
+
     return render(request, 'photographer/package/add_packages.html', context)
 
 def phototGrapherViewProfile(request):
@@ -110,6 +116,7 @@ def completed_job(request, details_id):
         form = DebitForm(initial={'credit': details.package.price})
 
     return render(request, 'photographer/package/completed_job.html', {'form': form, 'details': details})
+
 def accounts_info(request):
     income = Income.objects.filter(photographer_id=request.user.id)
     total_credit = income.aggregate(Sum('credit'))['credit__sum'] or 0
@@ -122,3 +129,25 @@ def accounts_info(request):
         'total_profit': total_profit,
     }
     return render(request, 'photographer/incomes.html', context)
+
+
+@login_required
+def updatePhotographerProfile(request):
+    if request.method == 'POST':
+        user = request.user
+        user.name = request.POST['name']
+        user.phone = request.POST['phone']
+        user.email = request.POST['email']
+        password = request.POST['new_password']
+        if password:
+            user.password = make_password(password)
+            user.save()
+            update_session_auth_hash(request, user)  # Prevents logout
+        else:
+            user.save()
+        messages.success(request, 'Profile updated successfully.')
+        return redirect('phototGrapherViewProfile')
+    else:
+        # Pass user's information to the template
+        context = {'user': request.user}
+        return render(request, 'photographer/profile.html', context)

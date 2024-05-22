@@ -1,12 +1,166 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-<h3>Admin Dashboard from admin panel app</h3>
-<div>
-    {% if user.is_authenticated %}
-    <p>Logged in as: {{ user.name }}</p>
-    {% else %}
-    <p>Please <a href="{% url 'login' %}">log in</a> to view the dashboard.</p>
-    {% endif %}
+{% extends 'admin.html' %} {% load static %} {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-users fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Total Users</h5>
+                                <p class="card-text">{{ total_users }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-camera fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Total Photographers</h5>
+                                <p class="card-text">{{ total_photographers }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-camera fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Total Admins</h5>
+                                <p class="card-text">{{ total_admins }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-check fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Completed Orders</h5>
+                                <p class="card-text">{{ completed_orders }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-clock fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Pending Orders</h5>
+                                <p class="card-text">{{ pending_orders }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-box-open fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Approved Orders</h5>
+                                <p class="card-text">{{ approved_orders }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-check-circle fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Approved Packages</h5>
+                                <p class="card-text">{{ approved_packages }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-hourglass-half fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Pending Packages</h5>
+                                <p class="card-text">{{ pending_packages }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="icon-container">
+                                <i class="fas fa-times-circle fa-2x"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h5 class="card-title">Declined Packages</h5>
+                                <p class="card-text">{{ declined_packages }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<style>
+
+  .card {
+    background-color: #f8f9fa;
+    border: 1px solid #e3e6f0;
+    border-radius: 10px;
+  }
+  .card-body {
+    padding: 1.25rem;
+  }
+  .card-text {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #5a5c69;
+        margin: 0;
+        text-align: center;
+    }
+
+  .card-title {
+    text-align: center;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #4e73df;
+  }
+
+  .icon-container {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #e3e6f0;
+        color: #4e73df;
+    }
+    
+</style>
+
 {% endblock content %}

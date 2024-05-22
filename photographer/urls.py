@@ -9,6 +9,7 @@ urlpatterns = [
     path('add_package', views.add_package, name='add_package'),
     path('view_packages', views.view_packages, name='view_packages') , 
     path('view_profile', views.phototGrapherViewProfile, name='phototGrapherViewProfile') , 
+    path('updatePhotographerProfile', views.updatePhotographerProfile, name='updatePhotographerProfile') , 
     path('delete_package/<int:pk>/', views.delete_package, name='delete_package'),
     path('edit_package/<int:pk>/', views.edit_package, name='edit_package'),
     path('received_jobs', views.received_jobs, name='received_jobs') , 
@@ -16,6 +17,7 @@ urlpatterns = [
     path('reject_job/<int:details_id>/', views.reject_job, name='reject_job'),
     path('completed_job/<int:details_id>/', views.completed_job, name='completed_job'),
     path('accounts_info', views.accounts_info, name='accounts_info') , 
+    
 ]
 
 if settings.DEBUG:
